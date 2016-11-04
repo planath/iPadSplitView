@@ -1,6 +1,6 @@
 ﻿using UIKit;
 
-namespace iPadSplitView
+namespace iPadSplitView.iOS
 {
     public class Application
     {

@@ -6,7 +6,7 @@
 using Foundation;
 using System.CodeDom.Compiler;
 
-namespace iPadSplitView
+namespace iPadSplitView.iOS
 {
     [Register("DetailViewController")]
     partial class DetailViewController

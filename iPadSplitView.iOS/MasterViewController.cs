@@ -5,7 +5,7 @@ using UIKit;
 using Foundation;
 using CoreGraphics;
 
-namespace iPadSplitView
+namespace iPadSplitView.iOS
 {
     public partial class MasterViewController : UITableViewController
     {

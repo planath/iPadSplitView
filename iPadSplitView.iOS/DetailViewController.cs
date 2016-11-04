@@ -2,7 +2,7 @@
 
 using UIKit;
 
-namespace iPadSplitView
+namespace iPadSplitView.iOS
 {
     public partial class DetailViewController : UIViewController
     {
