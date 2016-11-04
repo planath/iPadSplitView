@@ -6,7 +6,7 @@
 //
 using Foundation;
 
-namespace iPadSplitView
+namespace iPadSplitView.iOS
 {
     [Register("MasterViewController")]
     partial class MasterViewController

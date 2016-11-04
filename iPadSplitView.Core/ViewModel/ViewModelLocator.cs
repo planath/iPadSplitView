@@ -43,16 +43,12 @@ namespace iPadSplitView.Core.ViewModel
             ////}
 
             SimpleIoc.Default.Register<MainViewModel>();
+            SimpleIoc.Default.Register<DetailViewModel>();
         }
 
-        public MainViewModel Main
-        {
-            get
-            {
-                return ServiceLocator.Current.GetInstance<MainViewModel>();
-            }
-        }
-        
+        public MainViewModel Main => ServiceLocator.Current.GetInstance<MainViewModel>();
+        public DetailViewModel Detail => ServiceLocator.Current.GetInstance<DetailViewModel>();
+
         public static void Cleanup()
         {
             // TODO Clear the ViewModels

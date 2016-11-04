@@ -1,5 +1,7 @@
 ﻿using System;
-
+using System.Collections.Generic;
+using GalaSoft.MvvmLight.Helpers;
+using iPadSplitView.Core.ViewModel;
 using UIKit;
 
 namespace iPadSplitView.iOS
@@ -25,6 +27,20 @@ namespace iPadSplitView.iOS
 
         void ConfigureView()
         {
+            Vm.Init();
+            // set bindings
+            bindings.Add(this.SetBinding(
+                () => Vm.Person.FirstName,
+                () => FirstNameTextView.Text));
+
+            bindings.Add(this.SetBinding(
+                () => Vm.Person.LastName,
+                () => LastNameTextView.Text));
+
+            bindings.Add(this.SetBinding(
+                () => Vm.Person.Email,
+                () => EmailTextView.Text));
+
             // Update the user interface for the detail item
             if (IsViewLoaded && DetailItem != null)
                 detailDescriptionLabel.Text = DetailItem.ToString();
@@ -42,6 +58,9 @@ namespace iPadSplitView.iOS
             base.DidReceiveMemoryWarning();
             // Release any cached data, images, etc that aren't in use.
         }
+
+        private readonly List<Binding<string,string>> bindings = new List<Binding<string, string>>();
+        private DetailViewModel Vm => Application.Locator.Detail;
     }
 }
 

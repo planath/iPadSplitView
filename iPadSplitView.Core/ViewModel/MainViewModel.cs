@@ -1,4 +1,8 @@
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using GalaSoft.MvvmLight;
+using iPadSplitView.Core.Model;
+using iPadSplitView.Core.Repository;
 
 namespace iPadSplitView.Core.ViewModel
 {
@@ -29,6 +33,13 @@ namespace iPadSplitView.Core.ViewModel
             ////{
             ////    // Code runs "for real"
             ////}
+        }
+
+        public ObservableCollection<Person> PeopleCollection { get; set; }
+
+        public void Init()
+        {
+            PeopleCollection = PeopleRepository.GetAllPeople();
         }
     }
 }

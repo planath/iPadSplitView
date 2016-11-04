@@ -1,4 +1,7 @@
 ﻿using Foundation;
+using GalaSoft.MvvmLight.Ioc;
+using GalaSoft.MvvmLight.Threading;
+using GalaSoft.MvvmLight.Views;
 using UIKit;
 
 namespace iPadSplitView.iOS
@@ -23,6 +26,14 @@ namespace iPadSplitView.iOS
             var navigationController = (UINavigationController)splitViewController.ViewControllers[1];
             navigationController.TopViewController.NavigationItem.LeftBarButtonItem = splitViewController.DisplayModeButtonItem;
             splitViewController.WeakDelegate = this;
+
+            // MVVM Light's DispatcherHelper for cross-thread handling.
+            DispatcherHelper.Initialize(application);
+            // Configure and register the MVVM Light NavigationService
+            //var nav = new NavigationService();
+            //SimpleIoc.Default.Register<INavigationService>(() => nav);
+            //nav.Initialize((UINavigationController)Window.RootViewController);
+            //nav.Configure("Detail", "DetailView");
 
             return true;
         }
