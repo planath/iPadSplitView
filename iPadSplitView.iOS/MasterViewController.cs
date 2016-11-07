@@ -7,6 +7,7 @@ using CoreGraphics;
 using GalaSoft.MvvmLight.Helpers;
 using iPadSplitView.Core.Model;
 using iPadSplitView.Core.ViewModel;
+using iPadSplitView.iOS.Helper;
 
 namespace iPadSplitView.iOS
 {
@@ -54,6 +55,7 @@ namespace iPadSplitView.iOS
         {
             cell.TextLabel.Text = person.FirstName + " " + person.LastName;
             cell.DetailTextLabel.Text = person.Email;
+            cell.BackgroundColor = person.Color.GetUIColor();
         }
 
         private UITableViewCell CreateTaskCell(NSString cellIdentifier)

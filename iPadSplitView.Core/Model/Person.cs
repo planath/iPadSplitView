@@ -8,12 +8,13 @@ namespace iPadSplitView.Core.Model
         private string _firstName;
         private string _lastName;
         private string _email;
+        private Color _color;
 
         public Person()
         {
         }
 
-        public Person(int id, string firstName, string lastName, string email)
+        public Person(int id, string firstName, string lastName, string email, Color color)
         {
             if (id == null) throw new ArgumentNullException(nameof(id));
             if (firstName == null) throw new ArgumentNullException(nameof(firstName));
@@ -23,6 +24,7 @@ namespace iPadSplitView.Core.Model
             _firstName = firstName;
             _lastName = lastName;
             _email = email;
+            _color = color;
             _id = id;
         }
             
@@ -60,7 +62,12 @@ namespace iPadSplitView.Core.Model
             get { return _email; }
             set { _email = value; }
         }
-            
+        public Color Color
+        {
+            get { return _color; }
+            set { _color = value; }
+        }
+
         public Person Clone()
         {
             return (Person) this.MemberwiseClone();

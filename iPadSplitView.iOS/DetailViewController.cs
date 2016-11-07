@@ -1,49 +1,43 @@
 ﻿using System;
 using System.Collections.Generic;
 using GalaSoft.MvvmLight.Helpers;
+using GalaSoft.MvvmLight.Messaging;
+using iPadSplitView.Core.Model;
 using iPadSplitView.Core.ViewModel;
+using iPadSplitView.iOS.Helper;
 using UIKit;
 
 namespace iPadSplitView.iOS
 {
     public partial class DetailViewController : UIViewController
     {
-        public object DetailItem { get; set; }
+        public Person Person { get; set; }
 
         public DetailViewController(IntPtr handle) : base(handle)
         {
         }
 
-        public void SetDetailItem(object newDetailItem)
+        public void SetDetailItem()
         {
-            if (DetailItem != newDetailItem)
-            {
-                DetailItem = newDetailItem;
-
-                // Update the view
-                ConfigureView();
-            }
+            FirstNameTextView.Text = Person.FirstName;
+            LastNameTextView.Text = Person.LastName;
+            EmailTextView.Text = Person.Email;
+            NavigationController.NavigationBar.BarTintColor = Person.Color.GetUIColor();
         }
 
         void ConfigureView()
         {
             Vm.Init();
-            // set bindings
-            bindings.Add(this.SetBinding(
-                () => Vm.Person.FirstName,
-                () => FirstNameTextView.Text));
+            
+            // If use with binding
+            _personBinding = this.SetBinding(
+                () => Vm.Person,
+                () => Person);
 
-            bindings.Add(this.SetBinding(
-                () => Vm.Person.LastName,
-                () => LastNameTextView.Text));
-
-            bindings.Add(this.SetBinding(
-                () => Vm.Person.Email,
-                () => EmailTextView.Text));
-
-            // Update the user interface for the detail item
-            if (IsViewLoaded && DetailItem != null)
-                detailDescriptionLabel.Text = DetailItem.ToString();
+            Messenger.Default.Register<PropertyChangedMessage<Person>>(this, (msg) =>
+            {
+                SetDetailItem();
+            });
         }
 
         public override void ViewDidLoad()
@@ -60,6 +54,7 @@ namespace iPadSplitView.iOS
         }
 
         private readonly List<Binding<string,string>> bindings = new List<Binding<string, string>>();
+        private Binding<Person, Person> _personBinding;
         private DetailViewModel Vm => Application.Locator.Detail;
     }
 }
