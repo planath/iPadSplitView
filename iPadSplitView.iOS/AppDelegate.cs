@@ -30,10 +30,10 @@ namespace iPadSplitView.iOS
             // MVVM Light's DispatcherHelper for cross-thread handling.
             DispatcherHelper.Initialize(application);
             // Configure and register the MVVM Light NavigationService
-            //var nav = new NavigationService();
-            //SimpleIoc.Default.Register<INavigationService>(() => nav);
-            //nav.Initialize((UINavigationController)Window.RootViewController);
-            //nav.Configure("Detail", "DetailView");
+            var nav = new NavigationService();
+            SimpleIoc.Default.Register<INavigationService>(() => nav);
+            nav.Initialize(navigationController);
+            nav.Configure("Settings", "SettingsView");
 
             return true;
         }

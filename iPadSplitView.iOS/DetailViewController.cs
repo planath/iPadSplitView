@@ -56,6 +56,11 @@ namespace iPadSplitView.iOS
         private readonly List<Binding<string,string>> bindings = new List<Binding<string, string>>();
         private Binding<Person, Person> _personBinding;
         private DetailViewModel Vm => Application.Locator.Detail;
+
+        partial void UIButton891_TouchUpInside(UIButton sender)
+        {
+            Vm.GoToSettings.Execute("");
+        }
     }
 }
 

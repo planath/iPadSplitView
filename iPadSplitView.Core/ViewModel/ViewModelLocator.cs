@@ -44,10 +44,12 @@ namespace iPadSplitView.Core.ViewModel
 
             SimpleIoc.Default.Register<MainViewModel>();
             SimpleIoc.Default.Register<DetailViewModel>();
+            SimpleIoc.Default.Register<TabBarViewModel>();
         }
 
         public MainViewModel Main => ServiceLocator.Current.GetInstance<MainViewModel>();
         public DetailViewModel Detail => ServiceLocator.Current.GetInstance<DetailViewModel>();
+        public TabBarViewModel TabBar => ServiceLocator.Current.GetInstance<TabBarViewModel>();
 
         public static void Cleanup()
         {

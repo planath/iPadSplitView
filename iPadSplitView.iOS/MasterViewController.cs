@@ -17,8 +17,6 @@ namespace iPadSplitView.iOS
         
         public MasterViewController(IntPtr handle) : base(handle)
         {
-            Title = NSBundle.MainBundle.LocalizedString("Master", "Master");
-
             PreferredContentSize = new CGSize(320f, 600f);
             ClearsSelectionOnViewWillAppear = false;
         }

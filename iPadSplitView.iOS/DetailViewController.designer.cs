@@ -30,6 +30,10 @@ namespace iPadSplitView.iOS
         [GeneratedCode ("iOS Designer", "1.0")]
         UIKit.UILabel LastNameTextView { get; set; }
 
+        [Action ("UIButton891_TouchUpInside:")]
+        [GeneratedCode ("iOS Designer", "1.0")]
+        partial void UIButton891_TouchUpInside (UIKit.UIButton sender);
+
         void ReleaseDesignerOutlets ()
         {
             if (detailDescriptionLabel != null) {

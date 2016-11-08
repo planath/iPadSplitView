@@ -36,9 +36,7 @@ namespace iPadSplitView.iOS
         public override void RowSelected(UITableView tableView, NSIndexPath indexPath)
         {
             base.RowSelected(tableView, indexPath);
-            
-            Console.WriteLine($"clicked on item at index {indexPath.Row}");
-            var msg = new PrepareDetailViewMessage() { SelectedIndexWas = indexPath.Row };
+            var msg = new PrepareDetailViewMessage() { SelectedIndexWas = indexPath.Row};
             Messenger.Default.Send<PrepareDetailViewMessage>(msg);
         }
         private MainViewModel Vm => Application.Locator.Main;
