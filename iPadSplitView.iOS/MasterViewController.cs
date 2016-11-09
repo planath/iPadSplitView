@@ -13,7 +13,7 @@ namespace iPadSplitView.iOS
 {
     public partial class MasterViewController : UITableViewController
     {
-        public DetailViewController DetailViewController { get; set; }
+        public ServerDetailTableViewController DetailViewController { get; set; }
         
         public MasterViewController(IntPtr handle) : base(handle)
         {
@@ -33,12 +33,12 @@ namespace iPadSplitView.iOS
             addButton.AccessibilityLabel = "addButton";
             NavigationItem.RightBarButtonItem = addButton;
 
-            DetailViewController = (DetailViewController)((UINavigationController)SplitViewController.ViewControllers[1]).TopViewController;
+            DetailViewController = (ServerDetailTableViewController)((UINavigationController)SplitViewController.ViewControllers[1]).TopViewController;
             
             var source = Vm.PeopleCollection.GetTableViewSource(
                  CreateTaskCell,
                  BindTaskCell,
-                 factory: () => new CustomListObservableTableSource());
+                 factory: () => new ServerMainListObservableTableSource());
 
             TableView.Source = source;
         }

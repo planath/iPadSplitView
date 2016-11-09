@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.ObjectModel;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
@@ -23,14 +22,6 @@ namespace iPadSplitView.Core.ViewModel
         public DetailViewModel(INavigationService nav)
         {
             _nav = nav;
-            ////if (IsInDesignMode)
-            ////{
-            ////    // Code runs in Blend --> create design time data.
-            ////}
-            ////else
-            ////{
-            ////    // Code runs "for real"
-            ////}
             GoToSettings = new RelayCommand(ExecuteGoToSettings);
             Messenger.Default.Register<PrepareDetailViewMessage>(this, (msg) =>
             {
@@ -57,7 +48,14 @@ namespace iPadSplitView.Core.ViewModel
             set
             {
                 _indexIs = value;
-                Person = PeopleRepository.GetPerson(_indexIs.Value + 1);
+                if (_indexIs != null)
+                {
+                    Person = PeopleRepository.GetPerson(_indexIs.Value + 1);
+                }
+                else
+                {
+                    Person = null;
+                }
             }
         }
 
@@ -69,7 +67,10 @@ namespace iPadSplitView.Core.ViewModel
             {
                 Person = PeopleRepository.GetPerson(_indexIs.Value);
             }
-            Person = PeopleRepository.GetPerson(1);
+            else
+            {
+                Person = null;
+            }
         }
         private void ExecuteGoToSettings()
         {

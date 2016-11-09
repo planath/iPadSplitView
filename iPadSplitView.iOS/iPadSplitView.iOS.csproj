@@ -84,10 +84,18 @@
     <CodesignKey>iPhone Distribution</CodesignKey>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="CustomListObservableTableSource.cs" />
+    <Compile Include="AboutViewController.cs" />
+    <Compile Include="AboutViewController.designer.cs">
+      <DependentUpon>AboutViewController.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ServerMainListObservableTableSource.cs" />
     <Compile Include="Helper\ExtensionMethods.cs" />
     <Compile Include="Main.cs" />
     <Compile Include="AppDelegate.cs" />
+    <Compile Include="ServerDetailTableViewController.cs" />
+    <Compile Include="ServerDetailTableViewController.designer.cs">
+      <DependentUpon>ServerDetailTableViewController.cs</DependentUpon>
+    </Compile>
     <Compile Include="TabBarController.cs" />
     <Compile Include="TabBarController.designer.cs">
       <DependentUpon>TabBarController.cs</DependentUpon>
@@ -98,10 +106,6 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DetailViewController.cs" />
-    <Compile Include="DetailViewController.designer.cs">
-      <DependentUpon>DetailViewController.cs</DependentUpon>
-    </Compile>
     <Compile Include="MasterViewController.cs" />
     <Compile Include="MasterViewController.designer.cs">
       <DependentUpon>MasterViewController.cs</DependentUpon>

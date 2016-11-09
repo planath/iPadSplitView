@@ -9,7 +9,7 @@ using UIKit;
 
 namespace iPadSplitView.iOS
 {
-    public class CustomListObservableTableSource : ObservableTableViewSource<Person>
+    public class ServerMainListObservableTableSource : ObservableTableViewSource<Person>
     {
         public override bool CanEditRow(UITableView tableView, NSIndexPath indexPath)
         {

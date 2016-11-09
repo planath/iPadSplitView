@@ -1,5 +1,7 @@
-﻿using GalaSoft.MvvmLight;
+﻿using System.Linq;
+using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Messaging;
+using GalaSoft.MvvmLight.Views;
 using iPadSplitView.Core.Message;
 using iPadSplitView.Core.Model;
 using iPadSplitView.iOS;
@@ -8,11 +10,14 @@ namespace iPadSplitView.Core.ViewModel
 {
     public class TabBarViewModel : ViewModelBase
     {
+        private readonly INavigationService _nav;
         private string[] _tabTitles = new[] { "Aktuell", "History", "Einstellungen" };
-        private int?[] _tabsIndex;
+        private int?[] _tabsIndex = new int?[] { null, null, null };
         private int _currentTab = 0;
-        public TabBarViewModel()
+        public TabBarViewModel(INavigationService nav)
         {
+            _nav = nav;
+
             Messenger.Default.Register<TabBarChangeMessage>(this, (msg) =>
             {
                 CurrentTabIndex = msg.SelectedTabIs;
@@ -40,9 +45,21 @@ namespace iPadSplitView.Core.ViewModel
             get { return _currentTab; }
             set
             {
+                var oldValue = _currentTab;
                 _currentTab = value;
-                var msg = new ShowLasSelectedPersonMessage() {SelectedRowWas = TabsIndex[value]};
-                Messenger.Default.Send<ShowLasSelectedPersonMessage>(msg);
+                if (_currentTab == 2)
+                {
+                    _nav.NavigateTo("Settings");
+                }
+                else if (oldValue == 2)
+                {
+                    _nav.GoBack();
+                }
+                else
+                {
+                    var msg = new ShowLasSelectedPersonMessage() { SelectedRowWas = TabsIndex[value] };
+                    Messenger.Default.Send<ShowLasSelectedPersonMessage>(msg);
+                }
             }
         }
 
