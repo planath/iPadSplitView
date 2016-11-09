@@ -1,9 +1,7 @@
-﻿using System.Linq;
-using GalaSoft.MvvmLight;
+﻿using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Messaging;
 using GalaSoft.MvvmLight.Views;
 using iPadSplitView.Core.Message;
-using iPadSplitView.Core.Model;
 using iPadSplitView.iOS;
 
 namespace iPadSplitView.Core.ViewModel
@@ -22,6 +20,7 @@ namespace iPadSplitView.Core.ViewModel
             {
                 CurrentTabIndex = msg.SelectedTabIs;
             });
+
             // remember last clicked row from each table in tab
             Messenger.Default.Register<PrepareDetailViewMessage>(this, (msg) =>
             {

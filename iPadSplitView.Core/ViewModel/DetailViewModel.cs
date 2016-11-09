@@ -16,9 +16,6 @@ namespace iPadSplitView.Core.ViewModel
         private int? _indexIs;
         private Person _person;
 
-        /// <summary>
-        /// Initializes a new instance of the DetailViewModel class.
-        /// </summary>
         public DetailViewModel(INavigationService nav)
         {
             _nav = nav;

@@ -13,6 +13,10 @@ namespace iPadSplitView.iOS
 {
     public partial class TabBarController : UITabBarController
     {
+        private Binding<int, int> _indexBinding;
+        private int _currentTabIndex;
+        private TabBarViewModel Vm => Application.Locator.TabBar;
+
         public int CurrentTabIndex
         {
             get { return _currentTabIndex; }
@@ -47,9 +51,5 @@ namespace iPadSplitView.iOS
         {
             CurrentTabIndex = Array.IndexOf(TabBar.Items, item);
         }
-        
-        private Binding<int, int> _indexBinding;
-        private int _currentTabIndex;
-        private TabBarViewModel Vm => Application.Locator.TabBar;
     }
 }

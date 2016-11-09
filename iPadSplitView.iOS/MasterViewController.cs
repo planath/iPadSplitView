@@ -13,28 +13,17 @@ namespace iPadSplitView.iOS
 {
     public partial class MasterViewController : UITableViewController
     {
-        public ServerDetailTableViewController DetailViewController { get; set; }
-        
+        private MainViewModel Vm => Application.Locator.Main;
         public MasterViewController(IntPtr handle) : base(handle)
         {
             PreferredContentSize = new CGSize(320f, 600f);
             ClearsSelectionOnViewWillAppear = false;
         }
-
         public override void ViewDidLoad()
         {
             base.ViewDidLoad();
             Vm.Init();
 
-            // Perform any additional setup after loading the view, typically from a nib.
-            NavigationItem.LeftBarButtonItem = EditButtonItem;
-
-            var addButton = new UIBarButtonItem(UIBarButtonSystemItem.Add/*, AddNewItem*/);
-            addButton.AccessibilityLabel = "addButton";
-            NavigationItem.RightBarButtonItem = addButton;
-
-            DetailViewController = (ServerDetailTableViewController)((UINavigationController)SplitViewController.ViewControllers[1]).TopViewController;
-            
             var source = Vm.PeopleCollection.GetTableViewSource(
                  CreateTaskCell,
                  BindTaskCell,
@@ -43,12 +32,8 @@ namespace iPadSplitView.iOS
             TableView.Source = source;
         }
 
-        public override void DidReceiveMemoryWarning()
-        {
-            base.DidReceiveMemoryWarning();
-            // Release any cached data, images, etc that aren't in use.
-        }
-        
+
+        #region Cell binding and creation helper functions
         private void BindTaskCell(UITableViewCell cell, Person person, NSIndexPath path)
         {
             cell.TextLabel.Text = person.FirstName + " " + person.LastName;
@@ -64,8 +49,8 @@ namespace iPadSplitView.iOS
 
             return cell;
         }
+        #endregion
 
-        private MainViewModel Vm => Application.Locator.Main;
     }
 }
 

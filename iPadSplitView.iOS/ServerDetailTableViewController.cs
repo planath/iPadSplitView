@@ -28,15 +28,15 @@ namespace iPadSplitView.iOS
             ConfirmButton.TintColor = UIColor.Black;
             ConfirmButton.Clicked += ConfirmButtonOnClicked;
 
+            // Bindings - (only initially working)
             Vm.Init();
-            // Bindings (only initially working)
             _personBinding = this.SetBinding(
                 () => Vm.Person,
                 () => ServerStatus);
 
             TableView.Source = _dataSource = new DataSource(this);
 
-            // binding does not update there for get object from message
+            // Messages - binding does not update there for get object from message
             Messenger.Default.Register<PropertyChangedMessage<Person>>(this, (msg) =>
             {
                 ServerStatus = msg.NewValue;
@@ -48,6 +48,7 @@ namespace iPadSplitView.iOS
         public Person ServerStatus { get; set; }
         public UIBarButtonItem ConfirmButton { get; private set; }
 
+        #region ConfirmButton helper functions
         private void ConfirmButtonOnClicked(object sender, EventArgs eventArgs)
         {
             UIAlertView alert = new UIAlertView()
@@ -82,6 +83,9 @@ namespace iPadSplitView.iOS
             }
 
         }
+        #endregion
+        
+        #region Table data source
 
         class DataSource : UITableViewSource
         {
@@ -95,8 +99,7 @@ namespace iPadSplitView.iOS
             }
 
             public Person Objects { get; set; }
-
-            // Customize the number of sections in the table view.
+            
             public override nint NumberOfSections(UITableView tableView)
             {
                 int returnVal = Objects != null ? 8 : 1;
@@ -107,8 +110,7 @@ namespace iPadSplitView.iOS
             {
                 return 1;
             }
-
-            // Customize the appearance of table view cells.
+            
             public override UITableViewCell GetCell(UITableView tableView, NSIndexPath indexPath)
             {
                 var cell = tableView.DequeueReusableCell(CellIdentifier, indexPath);
@@ -195,5 +197,6 @@ namespace iPadSplitView.iOS
             }
         }
 
+        #endregion
     }
 }
