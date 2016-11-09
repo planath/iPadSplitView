@@ -24,16 +24,19 @@ namespace iPadSplitView.iOS
         public override void ViewDidLoad()
         {
             base.ViewDidLoad();
+            ConfirmButton = new UIBarButtonItem(UIBarButtonSystemItem.Compose);
+            ConfirmButton.TintColor = UIColor.Black;
+            ConfirmButton.Clicked += ConfirmButtonOnClicked;
 
             Vm.Init();
-            //// If use with binding
+            // Bindings (only initially working)
             _personBinding = this.SetBinding(
                 () => Vm.Person,
                 () => ServerStatus);
 
             TableView.Source = _dataSource = new DataSource(this);
 
-            //binding does not update there for get object from message
+            // binding does not update there for get object from message
             Messenger.Default.Register<PropertyChangedMessage<Person>>(this, (msg) =>
             {
                 ServerStatus = msg.NewValue;
@@ -128,8 +131,15 @@ namespace iPadSplitView.iOS
                             break;
                         case 4:
                             cell.TextLabel.Text = Objects.Color.ToString();
-                            controller.NavigationController
-                                .NavigationBar.BackgroundColor = Objects.Color.GetUIColor();
+                            controller.NavigationController.NavigationBar.BackgroundColor = Objects.Color.GetUIColor();
+                            if (Objects.Color == Color.Red)
+                            {
+                                controller.NavigationItem.SetRightBarButtonItem(controller.ConfirmButton, false);
+                            }
+                            else
+                            {
+                                controller.NavigationItem.SetRightBarButtonItem(null, false);
+                            }
                             break;
                         case 5:
                             cell.TextLabel.Text = Objects.FirstName + " " + Objects.LastName;
